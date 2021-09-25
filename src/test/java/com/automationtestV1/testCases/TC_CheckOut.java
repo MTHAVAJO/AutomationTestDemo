@@ -19,6 +19,13 @@ public class TC_CheckOut extends BaseClass {
 		
 		
 		sp.cartOrder(driver, localactions);
+		sp.dropDownNav(driver, localactions);
+		sp.SummaryCheckout(driver, localactions);
+		sp.addressInformation(driver, localactions);
+		sp.shipInformation(driver, localactions);
+		sp.paymentMethod(driver, localactions);
+		sp.orderConfirm(driver, localactions);
+		
 		
 		
 		

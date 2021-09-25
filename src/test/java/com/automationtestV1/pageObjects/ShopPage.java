@@ -1,5 +1,7 @@
 package com.automationtestV1.pageObjects;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +19,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import junit.framework.Assert;
+
 public class ShopPage {
 	ChromeDriver localdriver;
 	
@@ -25,11 +29,6 @@ public class ShopPage {
 	
 	public ShopPage (ChromeDriver driver)
 	{
-		
-		localdriver = driver;
-		
-		//PageFactory.initElements(lactions, this);
-		
 		PageFactory.initElements(driver, this);
 		
 	}
@@ -68,22 +67,7 @@ public class ShopPage {
 	
 	*/
 	
-	
-	
-	
-	
-	
 
-	
-	
-
-	
-	
-	
-	
-	
-	
-	///
 	public void cartOrder (ChromeDriver driver, Actions actions) throws InterruptedException {
 			
 			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -111,18 +95,16 @@ public class ShopPage {
 			quickViewBut.click();
 			
 			
-			
 			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 			driver.switchTo().frame(0);
-			System.out.println("wait done");
 			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 			
 			WebElement elementButton = new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"add_to_cart\"]")));
 			elementButton.click();
+	}
+	
+	public void dropDownNav (ChromeDriver driver, Actions actions) throws InterruptedException {
 				
-			
-				
-				///
 				
 			try {
 				// Continue Shopping Button
@@ -135,17 +117,16 @@ public class ShopPage {
 			
 				WebElement checkOut = driver.findElementByXPath("//*[@id=\"button_order_cart\"]");
 				checkOut.click();
-				System.out.println("DONE");
 				
-				
-				////
-			
-				
+	
 			// Summary Checkout
 			
 			} catch (NoSuchWindowException e) {
 				System.out.println("No Window");
 			}
+	}
+	
+	public void SummaryCheckout (ChromeDriver driver, Actions actions) throws InterruptedException {
 			
 			WebElement pCheckOut = new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/a")));
 			pCheckOut.click();
@@ -162,18 +143,18 @@ public class ShopPage {
 			emailstr.append("mayooran");
 			emailstr.append(randemail.nextInt(100));
 			emailstr.append("@gmail.com");
-			
+
 			
 			WebElement createAccount = driver.findElementByXPath("//*[@id=\"email_create\"]");
 			createAccount.sendKeys(emailstr);
 			
 			WebElement createAccBut = driver.findElementByXPath("//*[@id=\"SubmitCreate\"]/span");
 			createAccBut.click();
-			Thread.sleep(1000);
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 			
+	}
 			
-			
-			
+	public void addressInformation (ChromeDriver driver, Actions actions) throws InterruptedException {	
 			
 			//Create Account
 			
@@ -190,7 +171,7 @@ public class ShopPage {
 			WebElement lastName = driver.findElementByXPath("//*[@id=\"customer_lastname\"]");
 			lastName.sendKeys("Thavajogarasa");
 			
-			System.out.println(emailstr);
+			
 		
 			
 			
@@ -205,25 +186,13 @@ public class ShopPage {
 			city.sendKeys("Mississauga");
 			
 			
-			
 			WebElement state = driver.findElement(By.id("id_state"));
 			Select objSelect = new Select(state);
 			objSelect.selectByVisibleText("Arizona");
-			//state.click();
-			//WebElement arizona = driver.findElement(By.cssSelector("#uniform-id_state > span"));
 			
-			
-			//driver.executeScript("arguments[0].innerHTML = 'Arizona'", arizona);
-			
-			//objSelect.selectByValue("label=Arizona");
-			
-			System.out.println("hello");
-			
-			
+
 			state.click();
-			//WebElement zip = driver.findElementByXPath("//*[@id=\"postcode\"]");
 			zip.sendKeys("33333");
-			
 			
 			WebElement mobilePhone = driver.findElementByXPath("//*[@id=\"phone_mobile\"]");
 			mobilePhone.sendKeys("6473310099");
@@ -234,37 +203,36 @@ public class ShopPage {
 			
 			WebElement register = driver.findElementByXPath("//*[@id=\"submitAccount\"]");
 			register.click();
-			
-
+	
 			// Address
-			
 			WebElement proceedCheckoutAdd = driver.findElementByXPath("//*[@id=\"center_column\"]/form/p/button");
 			proceedCheckoutAdd.click();
-			
+	}
+	
+	public void shipInformation (ChromeDriver driver, Actions actions) throws InterruptedException {
 			
 			WebElement termsOfService = driver.findElementByXPath("//*[@id=\"cgv\"]");
 			termsOfService.click();
 			
 			WebElement proceedCheckoutShip = driver.findElementByXPath("//*[@id=\"form\"]/p/button");
 			proceedCheckoutShip.click();
+	}
+	
+	public void paymentMethod (ChromeDriver driver, Actions actions) throws InterruptedException {
 			
 			WebElement payWire = driver.findElementByXPath("//*[@id=\"HOOK_PAYMENT\"]/div[1]/div/p/a");
 			payWire.click();
-			
 			WebElement confirmOrder = driver.findElementByXPath("//*[@id=\"cart_navigation\"]/button");
 			confirmOrder.click();
-			//Test
-			
-			// Order Confirmation
-			
+	}
+	
+	public void orderConfirm (ChromeDriver driver, Actions actions) throws InterruptedException {
 			
 			String confirm = driver.findElementByXPath("//*[@id=\"center_column\"]/div/p/strong").getText();
 			String confirmMsg = "Your order on My Store is complete.";
-			System.out.println(confirm);
-			
-		
+			assertEquals(confirm,confirmMsg);
+				
 	}
-	
 
 	/*
 	public void selectTab() {
@@ -276,10 +244,7 @@ public class ShopPage {
 		actions.moveToElement(quickView).perform();
 		localdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		quickViewBut.click();
-		
-		
-		
-		
+
 	}
 	*/
 
