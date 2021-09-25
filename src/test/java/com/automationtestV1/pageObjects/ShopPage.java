@@ -43,28 +43,22 @@ public class ShopPage {
 	@FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[1]/ul/li[2]/ul/li[3]/a")
 	@CacheLookup
 	WebElement sumDress;
-	
-	
-	
+
 	@FindBy(xpath = "//*[@id=\"center_column\"]/div/p/strong")
 	@CacheLookup
 	WebElement confirm;
 	String confirmMsg = "Your order on My Store is complete.";
-	
 	@FindBy(xpath = "//*[@id=\"center_column\"]/ul/li[1]/div/div[1]/div/a[1]/img")
 	@CacheLookup
 	WebElement quickView;
-	
-	@FindBy (xpath = "//*[@id=\"center_column\"]/ul/li[1]/div/div[1]/div/a[2]/span")
+	@FindBy (xpath = "//*[@id=\"center_column\]/ul/li[1]/div/div[1]/div/a[2]/span")
 	@CacheLookup
 	WebElement quickViewBut;
-	
-	
 	///
 	@FindBy (xpath = "//*[@id=\"add_to_cart\"]")
 	@CacheLookup
 	WebElement elementButton;
-	
+
 	*/
 	
 
@@ -226,14 +220,19 @@ public class ShopPage {
 			confirmOrder.click();
 	}
 	
+	
 	public void orderConfirm (ChromeDriver driver, Actions actions) throws InterruptedException {
 			
 			String confirm = driver.findElementByXPath("//*[@id=\"center_column\"]/div/p/strong").getText();
 			String confirmMsg = "Your order on My Store is complete.";
-			assertEquals(confirm,confirmMsg);
-				
+			assertEquals(confirm,confirmMsg);	
+			
 	}
+	
+	
+	
 
+	
 	/*
 	public void selectTab() {
 		Actions actions = new Actions(localdriver);

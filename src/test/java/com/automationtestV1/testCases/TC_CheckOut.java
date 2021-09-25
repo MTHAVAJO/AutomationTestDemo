@@ -26,11 +26,7 @@ public class TC_CheckOut extends BaseClass {
 		sp.paymentMethod(driver, localactions);
 		sp.orderConfirm(driver, localactions);
 		
-		
-		
-		
-		
-		
+
 	}
 
 }
